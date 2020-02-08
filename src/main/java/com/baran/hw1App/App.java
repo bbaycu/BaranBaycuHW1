@@ -85,7 +85,7 @@ public class App
             Integer[] result = App.delegateCount(inputList, inputList2,input3AsInt,input4Flag);
 
             Map map = new HashMap<>();
-            map.put("result", ": \nCandidate 1:"+result[0]+"\nCandidate 2"+result[1]);
+            map.put("result", " \nCandidate 1:"+result[0]+" , Candidate 2"+result[1]);
             return new ModelAndView(map, "compute.mustache");
         }, new MustacheTemplateEngine());
 
