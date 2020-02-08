@@ -10,12 +10,13 @@ public class App
     }
 
     public static Integer[] delegateCount(ArrayList<Integer> candidate1Votes,ArrayList<Integer> candidate2Votes,
-                                          int numOfDelegatesPerDistrict,boolean isPopularVoteCount) throws Exception{
+                                          int numOfDelegatesPerDistrict,boolean isPopularVoteCount){
 
         Integer[] out=new Integer[2];
 
-        if(candidate1Votes.size()!=candidate2Votes.size()) throw new Exception("Bölge sayıları eşit olmalı");
-        if(numOfDelegatesPerDistrict<=0) throw new Exception("Delege sayısı pozitif olmalı");
+        if(candidate1Votes.size()!=candidate2Votes.size()) return new Integer[]{-1,-1}; //Hatalı durumda negatif delege sayısı döner
+        if(numOfDelegatesPerDistrict<=0) return new Integer[]{-2,-2};   //Hatalı durumda negatif delege sayısı döner
+        if(candidate1Votes.size()==0||candidate2Votes.size()==0) return new Integer[]{-3,-3};   //Hatalı durumda negatif delege sayısı döner
         int c1=0,c2=0;
 
         if (!isPopularVoteCount){
