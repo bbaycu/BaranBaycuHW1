@@ -29,7 +29,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.app.App</mainClass>
+                            <mainClass>com.baran.hw1App.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
