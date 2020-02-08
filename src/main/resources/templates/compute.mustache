@@ -1,21 +1,25 @@
 <title>My application</title>
   <h1>Hello, World!</h1>
     Result is {{result}}
+    <p>This app calculates the amount of districts based on the votes candidates have.
+    Write the amount of votes each candidate has for each region in the same order.
+    The amount of districts has to be the same and number of delegates per district must be positive</p>
 
 
   <form action="compute" method="post">
         <fieldset>
                 <p>Candidate 1 Votes</p>
-                <input type="text" name="input1" required="true">
+                <textarea name="input1" rows="10" cols="30"></textarea>
 
                 <p>Candidate 2 Votes</p>
-                <input type="text" name="input2" required="true">
+                <textarea name="input2" rows="10" cols="30"></textarea>
 
                 <p>Number of delegates per district</p>
-                <input type="text" name="input3" required="true">
+                <textarea name="input3" rows="10" cols="30"></textarea>
 
                 <p>Popular Vote System Needed?(Write yes or no)</p>
-                <input type="text" name="input4" required="true">
+                <textarea name="input4" rows="10" cols="30"></textarea>
+                <br>
                 <input type="submit" value="submit">
         </fieldset>
   </form>
