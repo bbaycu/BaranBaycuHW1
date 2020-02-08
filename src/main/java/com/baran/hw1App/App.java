@@ -1,13 +1,83 @@
 package com.baran.hw1App;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static spark.Spark.get;
+import static spark.Spark.port;
+import static spark.Spark.post;
+
+import spark.ModelAndView;
+import spark.template.mustache.MustacheTemplateEngine;
+
+
+
 
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public static void main(String[] args) {
+        port(getHerokuAssignedPort());
+
+        get("/", (req, res) -> "Hello, World");
+
+        post("/compute", (req, res) -> {
+            //System.out.println(req.queryParams("input1"));
+            //System.out.println(req.queryParams("input2"));
+            String input1 = req.queryParams("input1");
+            java.util.Scanner sc1 = new java.util.Scanner(input1);
+            sc1.useDelimiter("[;\r\n]+");
+            java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
+            while (sc1.hasNext())
+            {
+                int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
+                inputList.add(value);
+            }
+
+            String input2 = req.queryParams("input1");
+            java.util.Scanner sc2 = new java.util.Scanner(input1);
+            sc1.useDelimiter("[;\r\n]+");
+            java.util.ArrayList<Integer> inputList2= new java.util.ArrayList<>();
+            while (sc1.hasNext())
+            {
+                int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
+                inputList2.add(value);
+            }
+
+            String input3 = req.queryParams("input3").replaceAll("\\s","");
+            int input3AsInt = Integer.parseInt(input3);
+
+            String input4 = req.queryParams("input4").replaceAll("\\s","");
+            boolean input4Flag=false;
+            if(input4.toLowerCase()=="t"||input4.toLowerCase()=="true"||input4.toLowerCase()=="yes"||input4.toLowerCase()=="y") input4Flag=true;
+            if(input4.toLowerCase()=="f"||input4.toLowerCase()=="false"||input4.toLowerCase()=="no"||input4.toLowerCase()=="n") input4Flag=false;
+
+            Integer[] result = App.delegateCount(inputList, inputList2,input3AsInt,input4Flag);
+
+            Map map = new HashMap<>();
+            map.put("Delegates of 1st Candidate", result[0]);
+            map.put("Delegates of 2nd Candidate", result[1]);
+            return new ModelAndView(map, "compute.mustache");
+        }, new MustacheTemplateEngine());
+
+
+        get("/compute",
+                (rq, rs) -> {
+                    Map map = new HashMap();
+                    map.put("result", "not computed yet!");
+                    return new ModelAndView(map, "compute.mustache");
+                },
+                new MustacheTemplateEngine());
     }
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
+
 
     public static Integer[] delegateCount(ArrayList<Integer> candidate1Votes,ArrayList<Integer> candidate2Votes,
                                           int numOfDelegatesPerDistrict,boolean isPopularVoteCount){
