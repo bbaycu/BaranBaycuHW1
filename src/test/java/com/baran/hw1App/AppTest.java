@@ -40,9 +40,9 @@ public class AppTest
     }
 
     public void testGivenEmptyListThenReturnsNegativeDelegates(){
-        ArrayList<Integer>arr1= new ArrayList<>(Arrays.asList(1));
+        ArrayList<Integer>arr1= new ArrayList<>(Arrays.asList());
         ArrayList<Integer>arr2= new ArrayList<>(Arrays.asList());
-        int numOfDelsPerDist=0;
+        int numOfDelsPerDist=5;
         boolean popularVoteFlag=false;
 
         Integer[] expected=new Integer[]{-3,-3};
