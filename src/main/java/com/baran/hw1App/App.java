@@ -79,8 +79,8 @@ public class App
 
             String input4 = req.queryParams("input4").replaceAll("\\s","");
             boolean input4Flag=false;
-            if(input4.toLowerCase()=="t"||input4.toLowerCase()=="true"||input4.toLowerCase()=="yes"||input4.toLowerCase()=="y") input4Flag=true;
-            if(input4.toLowerCase()=="f"||input4.toLowerCase()=="false"||input4.toLowerCase()=="no"||input4.toLowerCase()=="n") input4Flag=false;
+            if(input4.toLowerCase().equals("t")||input4.toLowerCase().equals("true")||input4.toLowerCase().equals("yes")||input4.toLowerCase().equals("y")) input4Flag=true;
+            if(input4.toLowerCase().equals("f")||input4.toLowerCase().equals("false")||input4.toLowerCase().equals("no")||input4.toLowerCase().equals("n")) input4Flag=false;
 
             Integer[] result = App.delegateCount(inputList, inputList2,input3AsInt,input4Flag);
 
